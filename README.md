@@ -32,7 +32,7 @@
 ### [腾讯云函数SCF](https://console.cloud.tencent.com/scf/index)的版本<br>
 ### SCF计费问题：如果不是大量跑脚本的话，达不到收费标准的，如果不放心的话可以查询[账单详细](https://console.cloud.tencent.com/expense/bill/summary?businessCode=p_scf)<br>
 ### 实际从账户扣费时按2位小数进行扣费（即扣到分）,账单详细可以看到8位小数<br>
-1.下载requirements.zip所需库，到[层](https://console.cloud.tencent.com/scf/layer)里面新建一个层<br>
+1.下载[requirements.zip](https://github.com/mengshouer/CheckinBox/releases)所需库，到[层](https://console.cloud.tencent.com/scf/layer)里面新建一个层<br>
 2.到[函数服务](https://console.cloud.tencent.com/scf/list)里面新建一个函数，输入名字，运行环境选择python3.6，选择空白模板，下一步<br>
 3.修改执行方法为index.函数入口(具体到各脚本中看)，修改index.py文件，把SCF版py文件内容覆盖掉里面的函数，删除config.json<br>
 4.高级设置，添加多个环境变量key内输入：1.username 2.password 3.推送服务设置值(可选)<br>
@@ -53,8 +53,12 @@ Github Actions添加在Setting→Secrets→New secrets，腾讯云函数SCF设�
 2. Key: SCTKEY --> Value: [Server酱·Turbo版的推送SCTKEY的值](http://sct.ftqq.com/)<br>
 3. Key: Skey --> Value: [酷推调用代码Skey](https://cp.xuthus.cc/)<br>
 4. Key: Smode --> Value: 酷推的推送渠道，不设置默认send.可选参数(send,group,psend,pgroup,wx,tg,ww,ding)<br>
-5. Key: pushplus_token --> Value: [pushplus推送token](http://pushplus.hxtrip.com/)<br>
-6. Key: pushplus_topic --> Value: pushplus一对多推送需要的"群组编码"，一对一推送不用管填了报错
+5. Key: pushplus_token --> Value: [pushplus推送token](http://www.pushplus.plus/)<br>
+6. Key: pushplus_topic --> Value: pushplus一对多推送需要的"群组编码"，一对一推送不用管填了报错<br>
+7. Key: tg_token --> Value: Telegram bot的Token，Telegram机器人通知推送必填项<br>
+8. Key: tg_chatid --> Value: 接收通知消息的Telegram用户的id，Telegram机器人通知推送必填项<br>
+9. Key: tg_api_host --> Value: Telegram api自建的反向代理地址(不懂忽略此项)，默认tg官方api=api.telegram.org<br>
+PS:腾讯云函数SCF的默认无推送，需要推送的话需要将[pusher.py](https://github.com/mengshouer/CheckinBox/blob/master/pusher.py)内的内容直接复制到所需函数的代码最上方！！！
 #### 一切提醒都是报错提醒，没问题不提醒
 
 ### 自动同步仓库设置<br>
