@@ -25,8 +25,7 @@ def run(*arg):
     # print(r.text)
     if '需要先登录' in r.text:
         msg = "cookie失效啦！！！！\n"
-        pusher("V2EX  Cookie失效啦！！！", r.text)
-        print(msg)
+        pusher("V2EX  Cookie失效啦！！！", r.text[:200])
         return msg
     elif '每日登录奖励已领取' in r.text:
         msg = '今天已经签到过啦！！！\n'
@@ -46,9 +45,13 @@ def run(*arg):
         r = s.get(check_url, headers=headers, verify=False, timeout=120)
         data = re.compile(r'\d+?\s的每日登录奖励\s\d+\s铜币').search(r.text)
         msg += data[0] + '\n'
+    elif '登录' in sign.text:
+        msg = "cookie失效啦！！！！\n"
+        pusher("V2EX  Cookie失效啦！！！")
+        return msg
     else:
         msg = '签到失败！\n'
-        pusher("V2EX  签到失败！！！", sign.text)
+        pusher("V2EX  签到失败！！！", sign.text[:200])
     return msg
 
 def main(*arg):
